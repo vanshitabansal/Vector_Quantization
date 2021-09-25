@@ -65,17 +65,19 @@ int _tmain(int argc, _TCHAR* argv[])
 		}
 		printf("\n ");
 	}*/
-	
-	while(true){
-		dist=kmeans(universe,codebook,tokhura_weights,dist);
+	int count=0;
+	while(true){count++;
+		dist=kmeans(universe,codebook,tokhura_weights);
 		
 		avg_dist=dist*1.0/M;
-		if(distortion-dist<=delta)
+		printf("Average Distortion: %lf %d\n",avg_dist,count);
+		if(abs(distortion-avg_dist)>delta)			
+			distortion=avg_dist;
+		else
 			break;
-		distortion=dist;
 
 	}
-	printf("Average Distortion: %lf\n",avg_dist);
+	printf("Average Distortion: %lf %d\n",avg_dist,count);
 	return 0;
 }
 
