@@ -11,8 +11,7 @@
 #define N 320
 #define M 6340
 void initialize_codebook(long double x[M][p],long double y[k][p]){
-	for(int i=0;i<k;i++){
-		
+	for(int i=0;i<k;i++){		
 		for(int j=0;j<p;j++){
 			y[i][j]=x[i][j];
 		}
@@ -21,19 +20,17 @@ void initialize_codebook(long double x[M][p],long double y[k][p]){
 }
 long double find_tokhura_distance(double tokhura_weights[p],long double x[p],long double y[p]){
 	long double num=0,sum=0,total_sum=0;	
-	//Calculating Tokhura's distance using weight array
-	
+	//Calculating Tokhura's distance using weight array	
 		sum=0;
 		for(int u=0;u<12;u++){
 			sum+=tokhura_weights[u]*(x[u]-y[u])*(x[u]-y[u]);
-		}
-		total_sum+=sum;
+		}		
 	
-	return total_sum;
+	return sum;
 }
-long double kmeans(long double x[M][p],long double y[k][p],double tokhura_weights[p],long double dist){
+long double kmeans(long double x[M][p],long double y[k][p],double tokhura_weights[p]){
 	
-	long double min_dist=DBL_MAX,temp_dist=0,centroid[p]={0};
+	long double min_dist=DBL_MAX,temp_dist=0,dist=0,centroid[p]={0};
 	int bucket[k]={0},pos=0,region[k][M];
 
 	//Classify
