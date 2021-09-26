@@ -21,21 +21,13 @@ void initialize_codebook(long double x[M][p],long double y[k][p]){
 	}
 	
 }
-long double find_tokhura_distance(double tokhura_weights[p],long double x[p],long double y[p]){
-	long double num=0,sum=0,total_sum=0;	
-	//Calculating Tokhura's distance using weight array	
-		sum=0;
-		for(int u=0;u<p;u++){
-			sum+=tokhura_weights[u]*(x[u]-y[u])*(x[u]-y[u]);
-		}		
-	
-	return sum;
-}
+
 long double kmeans(long double x[M][p],long double y[k][p],double tokhura_weights[p]){
 	
 	long double min_dist=DBL_MAX,temp_dist=0,dist=0;
 	int bucket[k]={0},pos=0,region[k][M];
 	int distances[k]={0};
+
 	//Classify
 	for(int i=0;i<M;i++){ 
 		min_dist=1000000000.0;
@@ -47,7 +39,7 @@ long double kmeans(long double x[M][p],long double y[k][p],double tokhura_weight
 
 			
 		}	
-		//temp_dist+=find_tokhura_distance(tokhura_weights,x[i],y[j]);
+		
 		for(int j=0;j<k;j++){
 			if(min_dist>distances[j]){
 				min_dist=distances[j];
@@ -56,16 +48,11 @@ long double kmeans(long double x[M][p],long double y[k][p],double tokhura_weight
 		}
 			
 		region[pos][bucket[pos]++]=i;
-		dist+=min_dist;
-		//printf("%lf %d\n",min_dist,pos);
-	}
 
-	//Total Distortion
-	/*for(int i=0;i<k;i++){
-		for(int j=0;j<bucket[i];j++){
-			dist+=find_tokhura_distance(tokhura_weights,y[i],x[region[i][j]]);
-		}
-	}*/
+		//Total distortion
+		dist+=min_dist;
+		
+	}
 
 	//Centroid updation
 	for(int i=0;i<k;i++){	
