@@ -30,7 +30,7 @@ long double kmeans(long double x[M][p],long double y[k][p],double tokhura_weight
 	
 	long double min_dist=DBL_MAX,temp_dist=0,dist=0;
 	int bucket[k]={0},pos=0,region[k][M];
-	int distances[k]={0};
+	long double distances[k]={0};
 	//Classify
 	for(int i=0;i<M;i++){ 
 		min_dist=1000000000.0;
