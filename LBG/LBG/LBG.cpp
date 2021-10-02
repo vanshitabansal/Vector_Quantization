@@ -21,7 +21,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	//Declaring all the required arrays and variables
 
 	char arr[1024],*line,ch;
-	long double universe[M][p]={{0}},codebook[k][p]={{0}},num=0,dist=0,distortion=DBL_MAX,avg_dist=0,delta=0.00001,epsilon=0.03;
+	long double universe[M][p]={{0}},codebook[k][p]={{0}},num=0,dist=0,distortion=DBL_MAX,avg_dist=0,delta=0.0001,epsilon=0.03;
 	double tokhura_weights[]={1.0,3.0,7.0,13.0,19.0,22.0,25.0,33.0,42.0,50.0,56.0,61.0};
 	int cnt=0,index=0,row=0,col=0,m=0;
 	
@@ -62,10 +62,10 @@ int _tmain(int argc, _TCHAR* argv[])
 		count++;
 		for(int ind=0;ind<m;ind++){
 			for(int i=0;i<p;i++){
-				y_new1[i]=codebook[ind][i]+epsilon;
+				y_new1[i]=codebook[ind][i]*(1+epsilon);
 			}
 			for(int i=0;i<p;i++){
-				y_new2[i]=codebook[ind][i]-epsilon;
+				y_new2[i]=codebook[ind][i]*(1-epsilon);
 			}
 			for(int i=0;i<p;i++){
 				codebook[ind][i]=y_new1[i];
