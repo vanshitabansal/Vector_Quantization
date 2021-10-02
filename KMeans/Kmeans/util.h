@@ -26,7 +26,7 @@ long double kmeans(long double x[M][p],long double y[k][p],double tokhura_weight
 	
 	long double min_dist=DBL_MAX,temp_dist=0,dist=0;
 	int bucket[k]={0},pos=0,region[k][M];
-	int distances[k]={0};
+	long double distances[k]={0};
 
 	//Classify
 	for(int i=0;i<M;i++){ 
@@ -34,19 +34,20 @@ long double kmeans(long double x[M][p],long double y[k][p],double tokhura_weight
 		for(int j=0;j<k;j++){
 			distances[j]=0;
 			for(int u=0;u<p;u++){
+				//finding tokhura's distance between universe vector and codebook vector
 				distances[j]+=tokhura_weights[u]*(x[i][u]-y[j][u])*(x[i][u]-y[j][u]);
 			}
-
 			
 		}	
-		
+		//finding minimum distance vector in codebook and saving its index
 		for(int j=0;j<k;j++){
 			if(min_dist>distances[j]){
 				min_dist=distances[j];
 				pos=j;
 				}
 		}
-			
+		
+		//Assigning the universe vector to codebook region
 		region[pos][bucket[pos]++]=i;
 
 		//Total distortion
@@ -57,14 +58,20 @@ long double kmeans(long double x[M][p],long double y[k][p],double tokhura_weight
 	//Centroid updation
 	for(int i=0;i<k;i++){	
 		long double centroid[p]={0};
+
+		//Finding sum of Ci's to get centroid of a region
 		for(int u=0;u<p;u++){
 			for(int j=0;j<bucket[i];j++){
 				 centroid[u]+=x[region[i][j]][u];
 			}
-		 }
+		}
+
+		//Finding the centroid of region
 		for(int u=0;u<p;u++){
 			centroid[u]/=bucket[i];
 		}
+
+		//Updating codebook with new centroid
 		for(int u=0;u<p;u++){
 			y[i][u]=centroid[u];
 		}
