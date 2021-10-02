@@ -20,7 +20,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	//Declaring all the required arrays and variables
 	char arr[1024],*line,ch;
-	long double universe[M][p]={{0}},codebook[k][p]={{0}},num=0,dist=0,distortion=100000000.0,avg_dist=0,delta=0.00001;
+	long double universe[M][p]={{0}},codebook[k][p]={{0}},num=0,dist=0,distortion=100000000.0,avg_dist=0,delta=0.0001;
 	double tokhura_weights[]={1.0,3.0,7.0,13.0,19.0,22.0,25.0,33.0,42.0,50.0,56.0,61.0};
 	int cnt=0,index=0,row=0,col=0;
 	
